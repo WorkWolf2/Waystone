@@ -1,0 +1,76 @@
+#####################################
+####### MINEGOLEM PRODUCTION ########
+#####################################
+
+# Material List:
+# MiniMessage Formatting:
+
+database:
+  host: ''
+  port: 3306
+  database: ''
+  username: ''
+  password: ''
+
+# Mondi disabilitati: i player non possono piazzare waystone in questi mondi
+disabled-worlds:
+  - world_nether
+  - world_the_end
+
+max-limit: 2 # per-player waystone limit
+animation-duration: 8 # seconds (INT)
+
+# Impostare su NOTHING per disabilitare una lettera
+# Esempio:
+# A: NOTHING
+# B: STICK
+# - "ABA" sarebbe "vuoto stick vuoto"
+# puoi usare le lettere NOTHING come no
+crafting:
+  A: NOTHING
+  B: NOTHING
+  C: NOTHING
+  D: NOTHING
+  E: NOTHING
+  F: NOTHING
+  G: NOTHING
+  H: NOTHING
+  I: NOTHING
+  shape:
+    - "ABC"
+    - "DEF"
+    - "GHI"
+
+item:
+  name: "<gold><bold>Waystone</gold>"
+  lore:
+    - " "
+    - "<gray> Place it to set a waystone point</gray>"
+
+messages:
+  world_disabled: "<red>✖ You cannot place a waystone in this world!"
+  waystone_placed: "<green>✔ Waystone placed successfully!"
+  waystone_renamed: "<yellow>✎ Waystone renamed!"
+  cannot_destroy_waystone: "<red>✖ You cannot break this waystone!"
+  cannot_rename_not_owned: "<red>✖ You cannot rename a waystone that is not yours!"
+  too_far_from_waystone: "<red>✖ You are too far from the waystone!"
+  waystone_removed: "<green>✔ Waystone removed successfully!"
+  location_obstructed: "<red>✖ The location is obstructed!"
+  too_close_to_waystone: "<red>✖ There is another waystone too close!"
+  not_enough_xp: "<red>✖ You don't have enough XP!"
+  no_permission: "<red>✖ You don't have permission to do this!"
+  player_offline: "<red>✖ The player is offline!"
+  waystone_given: "<green>✔ you were given a waystone!"
+  max_waystones_reached: "<red>✖ You have reached the maximum number of waystones allowed!"
+
+gui:
+  name: "<bold><gray>Waystone"
+  waystone:
+    name_format: "<!i><bold><gray>%s</gray>"
+    lore:
+      - "d "
+      - "<!i><dark_gray>Location:</dark_gray>"
+      - "<!i><gray>%d, %d, %d in %s</gray>" # x, y, z, world
+      - "d "
+      - "<!i><yellow>LMB to teleport!</yellow>"
+      - "<!i><yellow>Shift+RMB to delete this waystone!</yellow>"
