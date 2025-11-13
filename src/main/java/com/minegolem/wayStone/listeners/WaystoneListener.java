@@ -10,12 +10,15 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -152,5 +155,25 @@ public class WaystoneListener implements Listener {
         event.getPlayer().sendMessage(Settings.CANNOT_DESTROY_WAYSTONE);
 
         event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onEntityExplode(EntityExplodeEvent event) {
+        event.blockList().removeIf(block -> {
+            CustomBlockData cbd = new CustomBlockData(Objects.requireNonNull(block), plugin);
+
+            return cbd.has(WayStone.INSTANCE.uuidNSK);
+        });
+    }
+
+    @EventHandler
+    public void onEntityCharge(EntityChangeBlockEvent event) {
+        Block block = event.getBlock();
+
+        CustomBlockData cbd = new CustomBlockData(Objects.requireNonNull(block), plugin);
+
+        if (cbd.has(WayStone.INSTANCE.uuidNSK)) {
+            event.setCancelled(true);
+        }
     }
 }
