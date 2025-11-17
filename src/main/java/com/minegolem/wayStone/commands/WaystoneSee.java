@@ -36,7 +36,7 @@ public class WaystoneSee implements CommandExecutor {
             return true;
         }
 
-        plugin.getGuiManager().openGUI(new WayStoneMenu(plugin), target);
+        plugin.getGuiManager().openGUI(new WayStoneMenu(plugin, target), player);
         return true;
     }
 }

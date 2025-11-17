@@ -25,11 +25,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-
-@RequiredArgsConstructor
 public class WayStoneMenu extends InventoryGUI {
 
     private final WayStone plugin;
+    private final Player targetPlayer;
+    private final boolean isAdminView;
+
+    public WayStoneMenu(WayStone plugin) {
+        this(plugin, null);
+    }
+
+    public WayStoneMenu(WayStone plugin, Player target) {
+        this.plugin = plugin;
+        this.targetPlayer = target;
+        this.isAdminView = target != null;
+    }
 
     @Override
     protected Inventory createInventory() {
@@ -38,7 +48,9 @@ public class WayStoneMenu extends InventoryGUI {
 
     @Override
     public void decorate(Player player) {
-        plugin.getDatabase().getWaystonesByPlayerUUID(player.getUniqueId()).thenAccept(waystones -> {
+        Player dataOwner = isAdminView ? targetPlayer : player;
+
+        plugin.getDatabase().getWaystonesByPlayerUUID(dataOwner.getUniqueId()).thenAccept(waystones -> {
 
             Bukkit.getScheduler().runTask(plugin, () -> {
 
