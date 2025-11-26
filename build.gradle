@@ -17,6 +17,8 @@ repositories {
         name = "sonatype"
         url = "https://oss.sonatype.org/content/groups/public/"
     }
+
+    maven { url = "https://maven.enginehub.org/repo/" }
 }
 
 dependencies {
@@ -28,6 +30,8 @@ dependencies {
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '3.5.3'
 
     implementation 'com.jeff-media:custom-block-data:2.2.4'
+
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.14'
 
     implementation 'org.jetbrains:annotations:23.0.0'
     compileOnly 'org.projectlombok:lombok:1.18.30'

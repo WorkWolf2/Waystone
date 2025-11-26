@@ -5,6 +5,7 @@ import com.minegolem.wayStone.WayStone;
 import com.minegolem.wayStone.data.WaystoneData;
 import com.minegolem.wayStone.menu.WayStoneMenu;
 import com.minegolem.wayStone.settings.Settings;
+import com.minegolem.wayStone.utils.WorldGuardUtils;
 import lombok.RequiredArgsConstructor;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
@@ -51,6 +52,11 @@ public class WaystoneListener implements Listener {
         if (disabled_worlds.contains(event.getPlayer().getWorld().getName())) {
             player.sendMessage(Component.text("Non puoi piazzare una waystone in questo mondo!"));
 
+            event.setCancelled(true);
+            return;
+        }
+
+        if (!WorldGuardUtils.canPlace(player, event.getBlock().getLocation())) {
             event.setCancelled(true);
             return;
         }
